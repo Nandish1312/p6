@@ -1,86 +1,168 @@
 #include <iostream>
 #include <string>
+
 #include "Individual.h"
+
 using namespace std;
-//constructor
-Individual::Individual (string bin_str){
-length=bin_str.size();
-// std::cout << length << '\n';
-for (int i = 0; i < length; i++) {
-copyOfList[i]='0';
+
+Individual::Individual (string string_initial)
+
+{
+
+length=string_initial.size();
+
+for (int i = 0; i < length; i++)
+
+{
+
+list_copy[i]='0';
+
 }
-binaryString=bin_str;
+
+bin_str=string_initial;
+
 }
-//outputs a binary string representation
-string Individual::getString(){
-return binaryString;
+
+string Individual::getString()
+
+{
+
+return bin_str;
+
 }
-//returns the bit value at position pos
-int Individual::getBit(int pos){
-// return binaryString[pos];
-if (pos>length) {
+
+int Individual::getBit(int placement)
+
+{
+
+if (placement > length)
+
+{
+
 return -1;
+
 }
-if (binaryString[pos]=='1') {
+
+if (bin_str[placement] == '1')
+
+{
+
 return 1;
+
 }
 
 return 0;
 
 }
-// get the certain bit and flip the bit value.
-void Individual::flipBit(int pos){
-if (binaryString[pos]=='1') {
-binaryString[pos]='0';
-}
-else{
-binaryString[pos]='1';
-}
-}
-//returns the longest consecutive sequence of ‘1’ digits in the list
-int Individual::getMaxOnes(){
-//initialize an variable called Maxones
-//store the Maximum
-int Maxones=0;
-//initialize an variable called sumOnes to
-//store the sumOnes ineach iteration
-int sumOnes=0;
-for (int i = 0; i < length; i++) {
-if (binaryString[i]=='1') {
-sumOnes+=1;
-}
-if (sumOnes>Maxones) {
-Maxones=sumOnes;
-}
-else if (binaryString[i]=='0') {
-sumOnes=0;
-}
+
+void Individual::flipBit(int placement)
+
+{
+
+if (bin_str[placement]=='1')
+
+{
+
+bin_str[placement]='0';
+
 }
 
+else
+
+{
+
+bin_str[placement]='1';
+
+}
+
+}
+
+int Individual::getMaxOnes()
+
+{
+
+int Maxones=0;
+
+int total=0;
+
+for (int i = 0; i < length; i++)
+
+{
+
+if (bin_str[i]=='1')
+
+{
+
+total+=1;
+
+}
+
+if (total>Maxones)
+
+{
+
+Maxones=total;
+
+}
+
+else if (bin_str[i]=='0')
+
+{
+
+total=0;
+
+}
+
+}
 
 return Maxones;
+
 }
-// returns the length of the list
-int Individual::getLength(){
+
+int Individual::getLength()
+
+{
+
 return length;
-}
-// rearrange the order of binaryString
-void Individual::rearrangeBit(int pos){
-
-int count=0;
-for (int i = 0; i < length; i++) {
-if (i<length-pos) {
-rearrange_binaryString[i]=binaryString[pos+i];
-
-count++;
-}
-else {
-rearrange_binaryString[i]=binaryString[i-count];
 
 }
+
+void Individual::bit_rearrange(int placement)
+
+{
+
+int num=0;
+
+for (int i = 0; i < length; i++)
+
+{
+
+if (i<length-placement)
+
+{
+
+rearrange_bin_str[i]=bin_str[placement+i];
+
+num++;
+
 }
 
-for (int i = 0; i < length; i++) {
-binaryString[i]=rearrange_binaryString[i];
+else
+
+{
+
+rearrange_bin_str[i]=bin_str[i-num];
+
 }
+
+}
+
+for (int i = 0; i < length; i++)
+
+{
+
+bin_str[i]=rearrange_bin_str[i];
+
+}
+
 }
