@@ -1,14 +1,12 @@
-#ifndef MUTATOR_H
-#define MUTATOR_H
-
+#ifndef Mutator_H
+#define Mutator_H
 #include <iostream>
 #include <string>
 #include "Individual.h"
-using namespace std;
+class Mutator {
 
-class Mutator{
-    public:
-        virtual Individual * mutate(Individual * gene, int k);
+public:
+virtual Individual* mutate(Individual* list, int k)=0;
 
 };
-#endif //MUTATOR_H
+#endif
